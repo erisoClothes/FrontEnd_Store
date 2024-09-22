@@ -7,7 +7,7 @@
     --negro: #212121;            /* Casi negro para texto principal */
     --gris: #ECEFF1;             /* Gris muy claro (casi blanco) para fondos alternos */
 
-    --fuentePrincipal: 'Staatliches', cursive;
+    --fuentePrincipal: 'Staatliches', sans-serif;
 }
 
 html {
