@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrontEnd Store - Producto</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img class="header__logo" src="img/logo.png" alt="Logotipo">
+        </a>
+    </header>
+
+    <nav class="navegacion">
+        <a class="navegacion__enlace" href="index.html">Tienda</a>
+        <a class="navegacion__enlace" href="nosotros.html">Nosotros</a>
+    </nav>
+
+    <main class="contenedor">
+        <h1 id="producto-nombre"></h1>
+
+        <div class="camisa">
+            <img class="camisa__imagen" id="producto-imagen" src="" alt="Imagen del Producto">
+            <div class="camisa__contenido">
+                <p id="producto-descripcion"></p>
+                
+                <form class="formulario">
+                    <select class="formulario__campo">
+                        <option disabled selected>-- Seleccionar Talla --</option>
+                        <option>Chica</option>
+                        <option>Mediana</option>
+                        <option>Grande</option>
+                    </select>
+                    <input class="formulario__campo" type="number" placeholder="Cantidad" min="1">
+                    <input class="formulario__submit" type="submit" value="Agregar al Carrito">
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__texto">Front End Store - Todos los derechos Reservados 2022.</p>
+    </footer>
+
+    <script>
+        // Datos de los productos
+        const productos = [
+            { id: 1, nombre: "VueJS", precio: 25, descripcion: "Camisa de VueJS para desarrolladores frontend. Perfecta para los amantes de este framework progresivo y reactivo." },
+            { id: 2, nombre: "AngularJS", precio: 25, descripcion: "Camisa de AngularJS para desarrolladores. Ideal para aquellos que disfrutan trabajando con este potente framework de Google." },
+            { id: 3, nombre: "ReactJS", precio: 25, descripcion: "Camisa de ReactJS para desarrolladores frontend. Perfecta para los entusiastas de esta biblioteca de JavaScript para construir interfaces de usuario." },
+            { id: 4, nombre: "Redux", precio: 25, descripcion: "Camisa de Redux para desarrolladores. Excelente para los que aman manejar el estado de sus aplicaciones de manera predecible." },
+            { id: 5, nombre: "NodeJS", precio: 25, descripcion: "Camisa de NodeJS para desarrolladores backend. Perfecta para los amantes de JavaScript en el servidor." },
+            { id: 6, nombre: "SASS", precio: 25, descripcion: "Camisa de SASS para desarrolladores frontend. Ideal para los que disfrutan escribiendo CSS con superpoderes." },
+            { id: 7, nombre: "HTML5", precio: 25, descripcion: "Camisa de HTML5 para desarrolladores web. Perfecta para los que aprecian la base de toda página web moderna." },
+            { id: 8, nombre: "GitHub", precio: 25, descripcion: "Camisa de GitHub para desarrolladores. Ideal para los amantes del control de versiones y la colaboración en proyectos de software." },
+            { id: 9, nombre: "BulmaCSS", precio: 25, descripcion: "Camisa de BulmaCSS para desarrolladores frontend. Perfecta para los que disfrutan trabajando con este moderno framework CSS." },
+            { id: 10, nombre: "TypeScript", precio: 25, descripcion: "Camisa de TypeScript para desarrolladores. Excelente para los que aman JavaScript con tipos estáticos." },
+            { id: 11, nombre: "Drupal", precio: 25, descripcion: "Camisa de Drupal para desarrolladores. Ideal para los entusiastas de este potente sistema de gestión de contenidos." },
+            { id: 12, nombre: "JavaScript", precio: 25, descripcion: "Camisa de JavaScript para desarrolladores. Perfecta para los amantes del lenguaje de programación más versátil de la web." },
+            { id: 13, nombre: "GraphQL", precio: 25, descripcion: "Camisa de GraphQL para desarrolladores. Ideal para los que disfrutan trabajando con esta poderosa tecnología de consulta de datos." },
+            { id: 14, nombre: "WordPress", precio: 25, descripcion: "Camisa de WordPress para desarrolladores y diseñadores web. Perfecta para los entusiastas del CMS más popular del mundo." }
+        ];
+    
+        // Función para obtener parámetros de la URL
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+    
+        // Obtener el ID del producto de la URL
+        const productId = parseInt(getParameterByName('id'));
+    
+        // Encontrar el producto correspondiente
+        const producto = productos.find(p => p.id === productId);
+    
+        if (producto) {
+            // Actualizar el contenido de la página con la información del producto
+            document.getElementById('producto-nombre').textContent = producto.nombre;
+            document.getElementById('producto-imagen').src = `img/${producto.id}.jpg`;
+            document.getElementById('producto-imagen').alt = `Imagen de ${producto.nombre}`;
+            document.getElementById('producto-descripcion').textContent = producto.descripcion;
+            document.getElementById('producto-precio').textContent = `$${producto.precio}`;
+            
+            // Actualizar el título de la página
+            document.title = `FrontEnd Store - ${producto.nombre}`;
+        } else {
+            // Manejar el caso en que no se encuentre el producto
+            document.getElementById('producto-nombre').textContent = "Producto no encontrado";
+            document.getElementById('producto-descripcion').textContent = "Lo sentimos, el producto que buscas no está disponible.";
+            document.getElementById('producto-imagen').style.display = 'none';
+            document.querySelector('.formulario').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
